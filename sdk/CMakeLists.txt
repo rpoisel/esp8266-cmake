@@ -3,12 +3,14 @@ add_library(ESP8266_SDK INTERFACE)
 if (ESP8266_SDK_VARIANT MATCHES "RTOS")
     set_property(TARGET ESP8266_SDK
         PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-        ${ESP8266_SDK_BASE}/include
-        ${ESP8266_SDK_BASE}/include/espressif
         ${ESP8266_SDK_BASE}/include/lwip
         ${ESP8266_SDK_BASE}/include/lwip/ipv4
         ${ESP8266_SDK_BASE}/include/lwip/ipv6
+        ${ESP8266_SDK_BASE}/include/espressif
         ${ESP8266_SDK_BASE}/extra_include
+        ${ESP8266_SDK_BASE}/include
+        ${ESP8266_SDK_BASE}/include/json
+        ${ESP8266_SDK_BASE}/examples/driver_lib/include
     )
     set_property(TARGET ESP8266_SDK
         PROPERTY INTERFACE_LINK_LIBRARIES
