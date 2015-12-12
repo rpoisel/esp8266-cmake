@@ -40,8 +40,8 @@ else()
 endif()
 set(ESP8266_LINKER_SCRIPT_PATH ${ESP8266_SDK_BASE}/ld/${ESP8266_LINKER_SCRIPT})
 
-set(CMAKE_C_FLAGS "-Os -g -O2 -std=c99 -Wpointer-arith -pipe -Wundef -Wl,-EL -fno-inline-functions -nostdlib -mlongcalls -mtext-section-literals  -D__ets__ -DICACHE_FLASH")
-set(CMAKE_EXE_LINKER_FLAGS "-T${ESP8266_LINKER_SCRIPT_PATH} -nostdlib -Wl,--no-check-sections -u call_user_start -Wl,-static")
+set(CMAKE_C_FLAGS "-Os -g -O2 -std=c99 -Wpointer-arith -pipe -Wundef -Wl,-EL -fno-inline-functions -ffunction-sections -nostdlib -mlongcalls -mtext-section-literals  -D__ets__ -DICACHE_FLASH")
+set(CMAKE_EXE_LINKER_FLAGS "-T${ESP8266_LINKER_SCRIPT_PATH} -nostdlib -Wl,--no-check-sections -u call_user_start -Wl,-static -Wl,--gc-sections")
 
 set(BUILD_LINK_PREFIX "-Wl,--start-group")
 set(BUILD_LINK_SUFFIX "-Wl,--end-group")
