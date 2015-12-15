@@ -1,47 +1,12 @@
 add_library(ESP8266_SDK INTERFACE)
 
+set (ESP8266_FLASH_SIZE "512" CACHE STRING "Size of flash in kB")
+set (ESP8266_SDK_VARIANT "" CACHE STRING "Variant of the SDK to use")
+
 if (ESP8266_SDK_VARIANT MATCHES "RTOS")
-    set_property(TARGET ESP8266_SDK
-        PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-        ${ESP8266_SDK_BASE}/include/lwip
-        ${ESP8266_SDK_BASE}/include/lwip/ipv4
-        ${ESP8266_SDK_BASE}/include/lwip/ipv6
-        ${ESP8266_SDK_BASE}/include/espressif
-        ${ESP8266_SDK_BASE}/extra_include
-        ${ESP8266_SDK_BASE}/include
-        ${ESP8266_SDK_BASE}/include/json
-        ${ESP8266_SDK_BASE}/examples/driver_lib/include
-    )
-    set_property(TARGET ESP8266_SDK
-        PROPERTY INTERFACE_LINK_LIBRARIES
-        minic
-        gcc
-        hal
-        pp
-        phy
-        net80211
-        lwip
-        wpa
-        main
-        crypto
-        freertos
-        lwip
-    )
+    include(rtos.cmake)
 elseif (ESP8266_SDK_VARIANT MATCHES "NONOS")
-    set_property(TARGET ESP8266_SDK
-        PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-        ${ESP8266_SDK_BASE}/include
-        ${ESP8266_SDK_BASE}/include/json
-    )
-    set_property(TARGET ESP8266_SDK
-        PROPERTY INTERFACE_LINK_LIBRARIES
-        gcc
-        hal
-        pp
-        phy
-        net80211
-        lwip
-        wpa
-        main
-    )
+    include(nonos.cmake)
+else()
+    message(FATAL_ERROR "SDK variant not supported.")
 endif()
