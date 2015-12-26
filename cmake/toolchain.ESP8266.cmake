@@ -9,7 +9,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/Modules")
 # specify the cross compiler
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
     set(ESP8266_OPEN_SDK_BASE $ENV{HOME}/git/esp-open-sdk CACHE PATH "Path to esp-open-sdk")
-    set(ESP8266_ESPTOOL ${ESP8266_OPEN_SDK_BASE}/esptool/esptool.py CACHE PATH "Path to the directory containing esptool.py")
+    set(ESP8266_ESPTOOL $ENV{HOME}/git/esptool-ck/esptool CACHE PATH "Path to the directory containing esptool.py")
     set(ESP8266_ESPTOOL_COM_PORT /dev/ttyUSB0 CACHE STRING "COM port to be used by esptool.py")
     set(ESP8266_XTENSA_COMPILER_HOME ${ESP8266_OPEN_SDK_BASE}/xtensa-lx106-elf/bin CACHE PATH "Directory containing the xtensa toolchain binaries")
     CMAKE_FORCE_C_COMPILER(${ESP8266_XTENSA_COMPILER_HOME}/xtensa-lx106-elf-gcc GNU)
