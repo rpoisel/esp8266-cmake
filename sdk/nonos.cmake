@@ -26,6 +26,7 @@ set_property(TARGET ESP8266_SDK
     lwip
     wpa
     main
+    crypto
     -T${ESP8266_LINKER_SCRIPT_PATH} 
 )
 
