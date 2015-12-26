@@ -1,4 +1,12 @@
-set(ESP8266_SDK_BASE ${ESP8266_OPEN_SDK_BASE}/sdk CACHE PATH "Path to the ESP8266 SDK")
+if(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
+    set(ESP8266_SDK_BASE ${ESP8266_OPEN_SDK_BASE}/sdk CACHE PATH "Path to the ESP8266 SDK")
+elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
+    set(ESP8266_SDK_BASE $ENV{USERPROFILE}/dev/projects/esp-open-sdk CACHE PATH "Path to the ESP8266 SDK")
+else()
+    message(FATAL_ERROR "Unsupported build platforom.")
+endif()
+
+
 if (ESP8266_FLASH_SIZE MATCHES "512K")
     set(ESP8266_LINKER_SCRIPT "eagle.app.v6.ld")
     set(FW_ADDR_1 0x00000 PARENT_SCOPE)
