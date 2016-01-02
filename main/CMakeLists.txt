@@ -1,10 +1,4 @@
-include(ESP8266-Deployment)
-
 add_library(USER_CODE INTERFACE)
-
-link_directories(
-    ${ESP8266_SDK_BASE}/lib
-)
 
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/null.c)
 
@@ -19,4 +13,7 @@ target_link_libraries(firmware
     ${BUILD_LINK_SUFFIX}
 )
 
-create_deployment_rules(firmware)
+set_target_properties(firmware PROPERTIES
+    LINKER_LANGUAGE C
+)
+

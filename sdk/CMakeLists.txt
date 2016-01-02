@@ -1,12 +1,17 @@
 add_library(ESP8266_SDK INTERFACE)
 
-set (ESP8266_FLASH_SIZE "512K" CACHE STRING "Size of flash")
-set (ESP8266_SDK_VARIANT "" CACHE STRING "Variant of the SDK to use")
+if (NOT DEFINED ESP8266_SDK_VARIANT OR ESP8266_SDK_VARIANT STREQUAL "")
+    message(FATAL_ERROR "ESP8266_SDK_VARIANT has not been defined")
+endif ()
+
+if (NOT DEFINED ESP8266_SDK_VERSION OR ESP8266_SDK_VERSION STREQUAL "")
+    message(FATAL_ERROR "ESP8266_SDK_VERSION has not been defined")
+endif()
 
 if (ESP8266_SDK_VARIANT MATCHES "RTOS")
-    include(rtos.cmake)
+    include(rtos-${ESP8266_SDK_VERSION}.cmake)
 elseif (ESP8266_SDK_VARIANT MATCHES "NONOS")
-    include(nonos.cmake)
+    include(nonos-${ESP8266_SDK_VERSION}.cmake)
 else()
-    message(FATAL_ERROR "SDK variant not supported.")
+    message(FATAL_ERROR "Unknown ESP8266_SDK_VARIANT given.")
 endif()
