@@ -44,8 +44,7 @@ find_library(ESP8266_SDK_LIB_SSL ssl ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_WPA wpa ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_WPS wps ${ESP8266_SDK_BASE}/lib)
 
-set_property(TARGET ESP8266_SDK
-    PROPERTY INTERFACE_LINK_LIBRARIES
+target_link_libraries(ESP8266_SDK INTERFACE
     gcc
     ${ESP8266_SDK_LIB_AT}
     ${ESP8266_SDK_LIB_CRYPTO}

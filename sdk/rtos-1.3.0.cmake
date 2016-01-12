@@ -21,8 +21,8 @@ elseif (ESP8266_FLASH_SIZE MATCHES "1M")
 else()
     message(FATAL_ERROR "Unsupported flash size")
 endif()
-set_property(TARGET ESP8266_SDK
-    PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+
+target_include_directories(ESP8266_SDK INTERFACE
     ${ESP8266_SDK_BASE}/include/lwip
     ${ESP8266_SDK_BASE}/include/lwip/ipv4
     ${ESP8266_SDK_BASE}/include/lwip/ipv6
@@ -32,6 +32,7 @@ set_property(TARGET ESP8266_SDK
     ${ESP8266_SDK_BASE}/include/json
     ${ESP8266_SDK_BASE}/examples/driver_lib/include
 )
+
 find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_ESPCONN espconn ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_ESPNOW espnow ${ESP8266_SDK_BASE}/lib)
@@ -53,8 +54,7 @@ find_library(ESP8266_SDK_LIB_SSL ssl ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_WPA wpa ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_WPS wps ${ESP8266_SDK_BASE}/lib)
 
-set_property(TARGET ESP8266_SDK
-    PROPERTY INTERFACE_LINK_LIBRARIES
+target_link_libraries(ESP8266_SDK INTERFACE
     gcc
     hal
     ${ESP8266_SDK_LIB_CRYPTO}

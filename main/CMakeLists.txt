@@ -1,5 +1,3 @@
-add_library(USER_CODE INTERFACE)
-
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/null.c)
 
 add_executable(firmware
@@ -7,10 +5,8 @@ add_executable(firmware
 )
 
 target_link_libraries(firmware
-    ${BUILD_LINK_PREFIX}
-    $<TARGET_PROPERTY:USER_CODE,INTERFACE_LINK_LIBRARIES>
-    $<TARGET_PROPERTY:ESP8266_SDK,INTERFACE_LINK_LIBRARIES>
-    ${BUILD_LINK_SUFFIX}
+    user_code
+    ESP8266_SDK
 )
 
 set_target_properties(firmware PROPERTIES
