@@ -1,3 +1,49 @@
+add_library(ESP8266_SDK INTERFACE)
+
+find_library(ESP8266_SDK_LIB_AT at ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_AXTLS axtls ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_ESPNOW espnow ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_HAL hal ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_JSON json ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_LWIP lwip ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_MAIN main ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_MESH mesh ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_NET80211 net80211 ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_PHY phy ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_PP pp ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_PWM pwm ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_SMARTCONFIG smartconfig ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_SSL ssl ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_UPGRADE upgrade ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_WPA wpa ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_WPA2 wpa2 ${ARDUINO_DIR}/tools/sdk/lib)
+find_library(ESP8266_SDK_LIB_WPS wps ${ARDUINO_DIR}/tools/sdk/lib)
+
+target_link_libraries(ESP8266_SDK INTERFACE
+    m
+    gcc
+    ${ESP8266_SDK_LIB_AT}
+    ${ESP8266_SDK_LIB_AXTLS}
+    ${ESP8266_SDK_LIB_CRYPTO}
+    ${ESP8266_SDK_LIB_ESPNOW}
+    ${ESP8266_SDK_LIB_HAL}
+    ${ESP8266_SDK_LIB_JSON}
+    ${ESP8266_SDK_LIB_LWIP}
+    ${ESP8266_SDK_LIB_MAIN}
+    ${ESP8266_SDK_LIB_MESH}
+    ${ESP8266_SDK_LIB_NET80211}
+    ${ESP8266_SDK_LIB_PHY}
+    ${ESP8266_SDK_LIB_PP}
+    ${ESP8266_SDK_LIB_PWM}
+    ${ESP8266_SDK_LIB_SMARTCONFIG}
+    ${ESP8266_SDK_LIB_SSL}
+    ${ESP8266_SDK_LIB_UPGRADE}
+    ${ESP8266_SDK_LIB_WPA}
+    ${ESP8266_SDK_LIB_WPA2}
+    ${ESP8266_SDK_LIB_WPS}
+)
+
 set(ARDUINO_DIR "${CMAKE_SOURCE_DIR}/external/Arduino" CACHE PATH "Path to the directory containing the Arduino sources")
 
 if (ARDUINO_DIR STREQUAL "")
@@ -43,54 +89,12 @@ target_compile_options(arduino PUBLIC
     -U__STRICT_ANSI__
 )
 
-set_target_properties(firmware PROPERTIES
-    LINK_FLAGS "-L${ARDUINO_DIR}/tools/sdk/ld -Teagle.flash.512k0.ld -u call_user_start -Wl,-wrap,system_restart_local -Wl,-wrap,register_chipv6_phy"
+target_link_libraries(arduino PUBLIC
+    ESP8266_SDK
 )
 
-add_library(ESP8266_SDK INTERFACE)
-find_library(ESP8266_SDK_LIB_AT at ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_AXTLS axtls ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_ESPNOW espnow ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_HAL hal ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_JSON json ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_LWIP lwip ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_MAIN main ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_MESH mesh ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_NET80211 net80211 ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_PHY phy ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_PP pp ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_PWM pwm ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_SMARTCONFIG smartconfig ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_SSL ssl ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_UPGRADE upgrade ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_WPA wpa ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_WPA2 wpa2 ${ARDUINO_DIR}/tools/sdk/lib)
-find_library(ESP8266_SDK_LIB_WPS wps ${ARDUINO_DIR}/tools/sdk/lib)
-
-set_property(TARGET ESP8266_SDK
-    PROPERTY INTERFACE_LINK_LIBRARIES
-    m
-    gcc
-    ${ESP8266_SDK_LIB_AT}
-    ${ESP8266_SDK_LIB_AXTLS}
-    ${ESP8266_SDK_LIB_CRYPTO}
-    ${ESP8266_SDK_LIB_ESPNOW}
-    ${ESP8266_SDK_LIB_HAL}
-    ${ESP8266_SDK_LIB_JSON}
-    ${ESP8266_SDK_LIB_LWIP}
-    ${ESP8266_SDK_LIB_MAIN}
-    ${ESP8266_SDK_LIB_MESH}
-    ${ESP8266_SDK_LIB_NET80211}
-    ${ESP8266_SDK_LIB_PHY}
-    ${ESP8266_SDK_LIB_PP}
-    ${ESP8266_SDK_LIB_PWM}
-    ${ESP8266_SDK_LIB_SMARTCONFIG}
-    ${ESP8266_SDK_LIB_SSL}
-    ${ESP8266_SDK_LIB_UPGRADE}
-    ${ESP8266_SDK_LIB_WPA}
-    ${ESP8266_SDK_LIB_WPA2}
-    ${ESP8266_SDK_LIB_WPS}
+set_target_properties(firmware PROPERTIES
+    LINK_FLAGS "-L${ARDUINO_DIR}/tools/sdk/ld -Teagle.flash.512k0.ld -u call_user_start -Wl,-wrap,system_restart_local -Wl,-wrap,register_chipv6_phy"
 )
 
 add_custom_target(

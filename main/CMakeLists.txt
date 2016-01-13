@@ -6,7 +6,6 @@ add_executable(firmware
 
 target_link_libraries(firmware
     user_code
-    ESP8266_SDK
 )
 
 set_target_properties(firmware PROPERTIES
