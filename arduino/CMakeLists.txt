@@ -93,6 +93,8 @@ target_link_libraries(arduino PUBLIC
     ESP8266_SDK
 )
 
+add_subdirectory(libraries)
+
 set_target_properties(firmware PROPERTIES
     LINK_FLAGS "-L${ARDUINO_DIR}/tools/sdk/ld -Teagle.flash.512k0.ld -u call_user_start -Wl,-wrap,system_restart_local -Wl,-wrap,register_chipv6_phy"
 )
