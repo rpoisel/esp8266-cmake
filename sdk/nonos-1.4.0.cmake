@@ -1,5 +1,5 @@
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
-    set(ESP8266_SDK_BASE ${ESP8266_OPEN_SDK_BASE}/sdk CACHE PATH "Path to the ESP8266 SDK")
+    set(ESP8266_SDK_BASE ${USER_HOME}/git/esp-open-sdk/sdk CACHE PATH "Path to the ESP8266 SDK")
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
     set(ESP8266_SDK_BASE ${USER_HOME}/dev/projects/esp-open-sdk CACHE PATH "Path to the ESP8266 SDK")
 else()

@@ -33,6 +33,7 @@ target_include_directories(ESP8266_SDK INTERFACE
     ${ESP8266_SDK_BASE}/examples/driver_lib/include
 )
 
+find_library(ESP8266_ARDUINO_SDK_LIB_HAL hal ${ARDUINO_ESP8266_DIR}/${ARDUINO_ESP8266_VERSION}/tools/sdk/lib)
 find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_ESPCONN espconn ${ESP8266_SDK_BASE}/lib)
 find_library(ESP8266_SDK_LIB_ESPNOW espnow ${ESP8266_SDK_BASE}/lib)
@@ -56,7 +57,7 @@ find_library(ESP8266_SDK_LIB_WPS wps ${ESP8266_SDK_BASE}/lib)
 
 target_link_libraries(ESP8266_SDK INTERFACE
     gcc
-    hal
+    ${ESP8266_ARDUINO_SDK_LIB_HAL}
     ${ESP8266_SDK_LIB_CRYPTO}
     ${ESP8266_SDK_LIB_ESPCONN}
     ${ESP8266_SDK_LIB_ESPNOW}
