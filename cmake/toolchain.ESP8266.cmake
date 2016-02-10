@@ -20,15 +20,8 @@ else()
 endif()
 
 set(ARDUINO_DIR "${USER_HOME}/.arduino15" CACHE PATH "Path to the directory containing the Arduino package files")
-set(ARDUINO_ESP8266_DIR ${ARDUINO_DIR}/packages/esp8266/hardware/esp8266 CACHE PATH "Path to the directory containing ESP8266 specific arduino files")
-set(ARDUINO_ESP8266_VERSION "2.0.0" CACHE STRING "Version of the ESP8266 Arduino package")
-
 if (ARDUINO_DIR STREQUAL "")
     message(FATAL_ERROR "ARDUINO_DIR has not been set.")
-endif ()
-
-if (ARDUINO_ESP8266_DIR STREQUAL "")
-    message(FATAL_ERROR "ARDUINO_ESP8266_DIR has not been set.")
 endif ()
 
 file(GLOB_RECURSE ESP8266_XTENSA_C_COMPILERS ${ARDUINO_DIR}/packages/esp8266/tools/xtensa-lx106-elf-gcc FOLLOW_SYMLINKS xtensa-lx106-elf-gcc${HOST_EXECUTABLE_SUFFIX})
