@@ -57,7 +57,7 @@ file(GLOB ARDUINO_SRC_ASM
 
 set_source_files_properties(${ARDUINO_SRC_ASM} PROPERTIES
     LANGUAGE ASM
-    COMPILE_FLAGS ${CMAKE_C_FLAGS}
+    COMPILE_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_C_FLAGS_DEBUG}"
 )
 
 add_library(arduino STATIC

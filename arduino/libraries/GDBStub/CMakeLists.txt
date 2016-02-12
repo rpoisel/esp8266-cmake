@@ -9,7 +9,7 @@ file(GLOB GDBSTUB_LIB_SRC_ASM
 
 set_source_files_properties(${GDBSTUB_LIB_SRC_ASM} PROPERTIES
     LANGUAGE ASM
-    COMPILE_FLAGS ${CMAKE_C_FLAGS}
+    COMPILE_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_C_FLAGS_DEBUG}"
 )
 
 add_library(esp8266gdbstub STATIC

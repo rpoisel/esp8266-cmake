@@ -38,8 +38,16 @@ message("Using " ${ESP8266_ESPTOOL} " esptool binary.")
 CMAKE_FORCE_C_COMPILER(${ESP8266_XTENSA_C_COMPILER} GNU_C)
 CMAKE_FORCE_CXX_COMPILER(${ESP8266_XTENSA_CXX_COMPILER} GNU_CXX)
 
-set(CMAKE_C_FLAGS "-Os -g -std=gnu99 -Wpointer-arith -Wno-implicit-function-declaration -Wundef -pipe -D__ets__ -DICACHE_FLASH -fno-inline-functions -ffunction-sections -nostdlib -mlongcalls -mtext-section-literals -falign-functions=4 -fdata-sections")
-set(CMAKE_CXX_FLAGS "-Os -g -D__ets__ -DICACHE_FLASH -mlongcalls -mtext-section-literals -fno-exceptions -fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections")
+set(CMAKE_BUILD_TYPE Release CACHE STRING "")
+
+set(CMAKE_C_FLAGS "-std=gnu99 -Wpointer-arith -Wno-implicit-function-declaration -Wundef -pipe -D__ets__ -DICACHE_FLASH -fno-inline-functions -ffunction-sections -nostdlib -mlongcalls -mtext-section-literals -falign-functions=4 -fdata-sections" CACHE STRING "")
+set(CMAKE_C_FLAGS_DEBUG " -Og -ggdb3 -DUSE_GDBSTUB" CACHE STRING "")
+set(CMAKE_C_FLAGS_RELEASE " -Os -g" CACHE STRING "")
+
+set(CMAKE_CXX_FLAGS "-D__ets__ -DICACHE_FLASH -mlongcalls -mtext-section-literals -fno-exceptions -fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections" CACHE STRING "")
+set(CMAKE_CXX_FLAGS_DEBUG "-Og -ggdb3 -DUSE_GDBSTUB" CACHE STRING "")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os -g" CACHE STRING "")
+
 set(CMAKE_EXE_LINKER_FLAGS "-nostdlib -Wl,--no-check-sections -Wl,-static -Wl,--gc-sections")
 
 set(CMAKE_C_LINK_EXECUTABLE "<CMAKE_C_COMPILER> <FLAGS> <CMAKE_C_LINK_FLAGS> <LINK_FLAGS> -o <TARGET> -Wl,--start-group <OBJECTS> <LINK_LIBRARIES> -Wl,--end-group")
