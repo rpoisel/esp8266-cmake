@@ -1,4 +1,4 @@
-set(ARDUINO_ESP8266_DIR ${ARDUINO_DIR}/packages/esp8266/hardware/esp8266/2.0.0 CACHE PATH "Path to the directory containing ESP8266 specific arduino files")
+set(ARDUINO_ESP8266_DIR ${ARDUINO_DIR}/packages/esp8266/hardware/esp8266/2.1.0 CACHE PATH "Path to the directory containing ESP8266 specific arduino files")
 if (ARDUINO_ESP8266_DIR STREQUAL "")
     message(FATAL_ERROR "ARDUINO_ESP8266_DIR has not been set.")
 endif ()
