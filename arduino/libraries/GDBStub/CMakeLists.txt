@@ -14,9 +14,3 @@ target_include_directories(esp8266gdbstub PUBLIC
     ${ARDUINO_ESP8266_DIR}/libraries/GDBStub/src/xtensa/config
 )
 
-target_link_libraries(esp8266gdbstub PUBLIC
-    arduino
-)
-
-
-

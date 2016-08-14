@@ -1,10 +1,3 @@
-set(ARDUINO_ESP8266_DIR ${ARDUINO_DIR}/packages/esp8266/hardware/esp8266/2.0.0 CACHE PATH "Path to the directory containing ESP8266 specific arduino files")
-if (ARDUINO_ESP8266_DIR STREQUAL "")
-    message(FATAL_ERROR "ARDUINO_ESP8266_DIR has not been set.")
-endif ()
-
-add_library(ESP8266_SDK INTERFACE)
-
 find_library(ESP8266_SDK_LIB_AT at ${ARDUINO_ESP8266_DIR}/tools/sdk/lib)
 find_library(ESP8266_SDK_LIB_AXTLS axtls ${ARDUINO_ESP8266_DIR}/tools/sdk/lib)
 find_library(ESP8266_SDK_LIB_CRYPTO crypto ${ARDUINO_ESP8266_DIR}/tools/sdk/lib)
@@ -23,9 +16,7 @@ find_library(ESP8266_SDK_LIB_UPGRADE upgrade ${ARDUINO_ESP8266_DIR}/tools/sdk/li
 find_library(ESP8266_SDK_LIB_WPA wpa ${ARDUINO_ESP8266_DIR}/tools/sdk/lib)
 find_library(ESP8266_SDK_LIB_WPS wps ${ARDUINO_ESP8266_DIR}/tools/sdk/lib)
 
-target_link_libraries(ESP8266_SDK INTERFACE
-    m
-    gcc
+install(FILES 
     ${ESP8266_SDK_LIB_AT}
     ${ESP8266_SDK_LIB_AXTLS}
     ${ESP8266_SDK_LIB_CRYPTO}
@@ -43,6 +34,7 @@ target_link_libraries(ESP8266_SDK INTERFACE
     ${ESP8266_SDK_LIB_UPGRADE}
     ${ESP8266_SDK_LIB_WPA}
     ${ESP8266_SDK_LIB_WPS}
+    DESTINATION lib
 )
 
 file(GLOB_RECURSE ARDUINO_SRC
@@ -65,9 +57,27 @@ add_library(arduino STATIC
 )
 
 target_include_directories(arduino PUBLIC
-    ${ARDUINO_ESP8266_DIR}/tools/sdk/include
-    ${ARDUINO_ESP8266_DIR}/cores/esp8266
-    ${ARDUINO_ESP8266_DIR}/variants/generic
+    $<INSTALL_INTERFACE:h>
+    $<INSTALL_INTERFACE:h/tools/sdk/include>
+    $<INSTALL_INTERFACE:h/variants/generic>
+    $<BUILD_INTERFACE:${ARDUINO_ESP8266_DIR}/cores/esp8266>
+    $<BUILD_INTERFACE:${ARDUINO_ESP8266_DIR}/tools/sdk/include>
+    $<BUILD_INTERFACE:${ARDUINO_ESP8266_DIR}/variants/generic>
+)
+
+install(DIRECTORY ${ARDUINO_ESP8266_DIR}/cores/esp8266/
+    DESTINATION h
+    FILES_MATCHING PATTERN "*.h"
+)
+
+install(DIRECTORY ${ARDUINO_ESP8266_DIR}/tools/sdk/include/
+    DESTINATION h/tools/sdk/include
+    FILES_MATCHING PATTERN "*.h"
+)
+
+install(DIRECTORY ${ARDUINO_ESP8266_DIR}/variants/generic/
+    DESTINATION h/variants/generic
+    FILES_MATCHING PATTERN "*.h"
 )
 
 target_compile_definitions(arduino PUBLIC
@@ -82,24 +92,5 @@ target_compile_options(arduino PUBLIC
     -U__STRICT_ANSI__
 )
 
-target_link_libraries(arduino PUBLIC
-    ESP8266_SDK
-)
-
-add_subdirectory(libraries)
-
-set_target_properties(firmware PROPERTIES
-    LINK_FLAGS "-L${ARDUINO_ESP8266_DIR}/tools/sdk/ld -Teagle.flash.512k0.ld -u call_user_start -Wl,-wrap,system_restart_local -Wl,-wrap,register_chipv6_phy"
-)
-
-add_custom_target(
-    firmware_binary ALL
-    COMMAND ${ESP8266_ESPTOOL} -eo ${ARDUINO_ESP8266_DIR}/bootloaders/eboot/eboot.elf -bo firmware.bin -bf 40 -bz ${ESP8266_FLASH_SIZE} -bs .text -bp 4096 -ec -eo $<TARGET_FILE:firmware> -bs .irom0.text -bs .text -bs .data -bs .rodata -bc -ec
-)
-set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES firmware.bin)
-
-add_dependencies(firmware_binary firmware)
-
-add_custom_target(flash COMMAND ${ESP8266_ESPTOOL} -vv -cd ck -cb 115200 -cp ${ESP8266_ESPTOOL_COM_PORT} -ca 0x00000 -cf firmware.bin)
-
-add_dependencies(flash firmware_binary)
+install(DIRECTORY cmake/ DESTINATION cmake/Modules FILES_MATCHING PATTERN "Find*.cmake")
+install(DIRECTORY cmake/ DESTINATION cmake FILES_MATCHING PATTERN "toolchain.*.cmake")
