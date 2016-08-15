@@ -43,17 +43,18 @@ file(GLOB_RECURSE ARDUINO_SRC
     ${ARDUINO_ESP8266_DIR}/cores/esp8266/*.cpp
 )
 
-file(GLOB ARDUINO_ASM_SRC
+file(GLOB ARDUINO_SRC_ASM
     ${ARDUINO_ESP8266_DIR}/cores/esp8266/*.S
 )
 
-set_source_files_properties(${ARDUINO_ASM_SRC} PROPERTIES
+set_source_files_properties(${ARDUINO_SRC_ASM} PROPERTIES
     LANGUAGE ASM
+    COMPILE_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_C_FLAGS_DEBUG}"
 )
 
 add_library(arduino STATIC
     ${ARDUINO_SRC}
-    ${ARDUINO_ASM_SRC}
+    ${ARDUINO_SRC_ASM}
 )
 
 target_include_directories(arduino PUBLIC
