@@ -58,12 +58,9 @@ add_library(arduino STATIC
 )
 
 target_include_directories(arduino PUBLIC
-    $<INSTALL_INTERFACE:h>
-    $<INSTALL_INTERFACE:h/tools/sdk/include>
-    $<INSTALL_INTERFACE:h/variants/generic>
-    $<BUILD_INTERFACE:${ARDUINO_ESP8266_DIR}/cores/esp8266>
-    $<BUILD_INTERFACE:${ARDUINO_ESP8266_DIR}/tools/sdk/include>
-    $<BUILD_INTERFACE:${ARDUINO_ESP8266_DIR}/variants/generic>
+    ${ARDUINO_ESP8266_DIR}/cores/esp8266
+    ${ARDUINO_ESP8266_DIR}/tools/sdk/include
+    ${ARDUINO_ESP8266_DIR}/variants/generic
 )
 
 install(DIRECTORY ${ARDUINO_ESP8266_DIR}/cores/esp8266/
@@ -93,5 +90,9 @@ target_compile_options(arduino PUBLIC
     -U__STRICT_ANSI__
 )
 
+install(TARGETS arduino ARCHIVE DESTINATION lib)
+
 install(DIRECTORY cmake/ DESTINATION cmake/Modules FILES_MATCHING PATTERN "Find*.cmake")
 install(DIRECTORY cmake/ DESTINATION cmake FILES_MATCHING PATTERN "toolchain.*.cmake")
+
+add_subdirectory(libraries)

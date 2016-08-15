@@ -2,18 +2,16 @@ file(GLOB WIRE_LIB_SRC
     ${ARDUINO_ESP8266_DIR}/libraries/Wire/*.cpp
 )
 
-add_library(esp8266wire STATIC
+target_sources(arduino PRIVATE
     ${WIRE_LIB_SRC}
 )
 
-target_include_directories(esp8266wire PUBLIC
+target_include_directories(arduino PRIVATE
     ${ARDUINO_ESP8266_DIR}/libraries/Wire
 )
 
-target_link_libraries(esp8266wire PUBLIC
-    arduino
+install(DIRECTORY ${ARDUINO_ESP8266_DIR}/libraries/Wire/
+    DESTINATION h/libraries/Wire
+    FILES_MATCHING PATTERN "*.h"
 )
-
-
-
 

@@ -27,6 +27,12 @@ set(ARDUINO_INC_DIRS
     ${_IMPORT_PREFIX}/h
     ${_IMPORT_PREFIX}/h/variants/generic
     ${_IMPORT_PREFIX}/h/tools/sdk/include
+    ${_IMPORT_PREFIX}/h/libraries/SPI
+    ${_IMPORT_PREFIX}/h/libraries/Wire
+    ${_IMPORT_PREFIX}/h/tools/sdk/lwip/include
+    ${_IMPORT_PREFIX}/h/libraries/ESP8266WiFi
+    ${_IMPORT_PREFIX}/h/libraries/ESP8266WiFi/include
+    ${_IMPORT_PREFIX}/h/libraries/ESP8266Webserver
 )
 
 set(ARDUINO_DEP_LIBS
