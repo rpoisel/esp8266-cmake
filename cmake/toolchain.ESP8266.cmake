@@ -1,5 +1,3 @@
-include(CMakeForceCompiler)
-
 set(CMAKE_SYSTEM_NAME ESP8266)
 set(CMAKE_SYSTEM_VERSION 1)
 
@@ -39,10 +37,9 @@ list(GET ESP8266_ESPTOOLS 0 ESP8266_ESPTOOL)
 
 message("Using " ${ESP8266_XTENSA_C_COMPILER} " C compiler.")
 message("Using " ${ESP8266_XTENSA_CXX_COMPILER} " C++ compiler.")
-message("Using " ${ESP8266_ESPTOOL} " esptool binary.")
 
-CMAKE_FORCE_C_COMPILER(${ESP8266_XTENSA_C_COMPILER} GNU_C)
-CMAKE_FORCE_CXX_COMPILER(${ESP8266_XTENSA_CXX_COMPILER} GNU_CXX)
+set(CMAKE_C_COMPILER ${ESP8266_XTENSA_C_COMPILER})
+set(CMAKE_CXX_COMPILER ${ESP8266_XTENSA_CXX_COMPILER})
 
 set(CMAKE_C_FLAGS "-Os -g -std=gnu99 -Wpointer-arith -Wno-implicit-function-declaration -Wundef -pipe -D__ets__ -DICACHE_FLASH -fno-inline-functions -ffunction-sections -nostdlib -mlongcalls -mtext-section-literals -falign-functions=4 -fdata-sections" CACHE STRING "C compiler flags")
 set(CMAKE_CXX_FLAGS "-Os -g -D__ets__ -DICACHE_FLASH -mlongcalls -mtext-section-literals -fno-exceptions -fno-rtti -falign-functions=4 -std=c++11 -MMD -ffunction-sections -fdata-sections" CACHE STRING "CXX compiler flags")
