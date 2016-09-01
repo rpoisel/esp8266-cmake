@@ -1,0 +1,3 @@
+[submodule "arduino/extlib/lis3mdl/lis3mdl-arduino"]
+	path = arduino/extlib/lis3mdl/lis3mdl-arduino
+	url = https://github.com/pololu/lis3mdl-arduino.git

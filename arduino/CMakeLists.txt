@@ -96,3 +96,4 @@ install(DIRECTORY cmake/ DESTINATION cmake/Modules FILES_MATCHING PATTERN "Find*
 install(DIRECTORY cmake/ DESTINATION cmake FILES_MATCHING PATTERN "toolchain.*.cmake")
 
 add_subdirectory(libraries)
+add_subdirectory(extlib)

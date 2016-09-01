@@ -33,6 +33,7 @@ set(ARDUINO_INC_DIRS
     ${_IMPORT_PREFIX}/h/libraries/ESP8266WiFi
     ${_IMPORT_PREFIX}/h/libraries/ESP8266WiFi/include
     ${_IMPORT_PREFIX}/h/libraries/ESP8266Webserver
+    ${_IMPORT_PREFIX}/h/extlib/lis3mdl
 )
 
 set(ARDUINO_DEP_LIBS
