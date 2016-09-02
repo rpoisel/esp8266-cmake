@@ -34,6 +34,10 @@ set(ARDUINO_INC_DIRS
     ${_IMPORT_PREFIX}/h/libraries/ESP8266WiFi/include
     ${_IMPORT_PREFIX}/h/libraries/ESP8266Webserver
     ${_IMPORT_PREFIX}/h/extlib/lis3mdl
+    ${_IMPORT_PREFIX}/h/extlib/pubsubclient
+    ${_IMPORT_PREFIX}/h/extlib/adafruit_gfx
+    ${_IMPORT_PREFIX}/h/extlib/adafruit_gfx/Fonts
+    ${_IMPORT_PREFIX}/h/extlib/adafruit_st7735
 )
 
 set(ARDUINO_DEP_LIBS
@@ -56,6 +60,7 @@ set(ARDUINO_DEP_LIBS
     ${ESP8266_SDK_LIB_WPS}
     m
     gcc
+    stdc++
 )
 
 set(ARDUINO_DEFINITIONS

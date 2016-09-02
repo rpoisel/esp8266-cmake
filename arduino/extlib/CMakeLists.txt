@@ -1,1 +1,4 @@
 add_subdirectory(lis3mdl)
+add_subdirectory(pubsubclient)
+add_subdirectory(adafruit_gfx)
+add_subdirectory(adafruit_st7735)

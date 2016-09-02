@@ -1,3 +1,12 @@
 [submodule "arduino/extlib/lis3mdl/lis3mdl-arduino"]
 	path = arduino/extlib/lis3mdl/lis3mdl-arduino
 	url = https://github.com/pololu/lis3mdl-arduino.git
+[submodule "arduino/extlib/adafruit_st7735/Adafruit-ST7735-Library"]
+	path = arduino/extlib/adafruit_st7735/Adafruit-ST7735-Library
+	url = https://github.com/adafruit/Adafruit-ST7735-Library.git
+[submodule "arduino/extlib/adafruit_gfx/Adafruit-GFX-Library"]
+	path = arduino/extlib/adafruit_gfx/Adafruit-GFX-Library
+	url = https://github.com/adafruit/Adafruit-GFX-Library.git
+[submodule "arduino/extlib/pubsubclient/pubsubclient"]
+	path = arduino/extlib/pubsubclient/pubsubclient
+	url = https://github.com/knolleary/pubsubclient.git
