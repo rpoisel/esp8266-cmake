@@ -34,10 +34,14 @@ set(ARDUINO_INC_DIRS
     ${_IMPORT_PREFIX}/h/libraries/ESP8266WiFi/include
     ${_IMPORT_PREFIX}/h/libraries/ESP8266Webserver
     ${_IMPORT_PREFIX}/h/extlib/lis3mdl
+    ${_IMPORT_PREFIX}/h/extlib/lsm6
     ${_IMPORT_PREFIX}/h/extlib/pubsubclient
     ${_IMPORT_PREFIX}/h/extlib/adafruit_gfx
     ${_IMPORT_PREFIX}/h/extlib/adafruit_gfx/Fonts
     ${_IMPORT_PREFIX}/h/extlib/adafruit_st7735
+    ${_IMPORT_PREFIX}/h/extlib/i2cdevlib
+    ${_IMPORT_PREFIX}/h/extlib/MPU6050
+    ${_IMPORT_PREFIX}/h/extlib/MPU9150
 )
 
 set(ARDUINO_DEP_LIBS

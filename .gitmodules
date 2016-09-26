@@ -10,3 +10,9 @@
 [submodule "arduino/extlib/pubsubclient/pubsubclient"]
 	path = arduino/extlib/pubsubclient/pubsubclient
 	url = https://github.com/knolleary/pubsubclient.git
+[submodule "arduino/extlib/lsm6/lsm6-arduino"]
+	path = arduino/extlib/lsm6/lsm6-arduino
+	url = https://github.com/pololu/lsm6-arduino.git
+[submodule "arduino/extlib/i2cdevlib/i2cdevlib"]
+	path = arduino/extlib/i2cdevlib/i2cdevlib
+	url = https://github.com/jrowberg/i2cdevlib.git

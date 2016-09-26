@@ -92,7 +92,7 @@ target_compile_options(arduino PUBLIC
 
 install(TARGETS arduino ARCHIVE DESTINATION lib)
 
-install(DIRECTORY cmake/ DESTINATION cmake/Modules FILES_MATCHING PATTERN "Find*.cmake")
+install(DIRECTORY cmake/Modules/ DESTINATION cmake/Modules FILES_MATCHING PATTERN "*.cmake")
 install(DIRECTORY cmake/ DESTINATION cmake FILES_MATCHING PATTERN "toolchain.*.cmake")
 
 add_subdirectory(libraries)

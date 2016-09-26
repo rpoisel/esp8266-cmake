@@ -14,6 +14,7 @@ endif ()
 
 install(DIRECTORY cmake/Modules DESTINATION cmake)
 install(DIRECTORY ${ARDUINO_ESP8266_DIR}/tools/sdk/ld/ DESTINATION ld FILES_MATCHING PATTERN "*.ld")
+install(FILES ${ARDUINO_ESP8266_DIR}/bootloaders/eboot/eboot.elf DESTINATION bootloaders/eboot)
 
 set(CPACK_GENERATOR "ZIP")
 set(CPACK_PACKAGE_FILE_NAME Arduino-${ARDUINO_VERSION})
